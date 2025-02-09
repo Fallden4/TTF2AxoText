@@ -10,7 +10,7 @@ import re
 class TTF2LetterRack:
     def __init__(self, root):
         self.root = root
-        self.root.title("TTF2LetterRack")
+        self.root.title("TTF2AxoText")
         ico = PhotoImage(file="faviDark.png")
         self.root.iconphoto(False, ico)
 

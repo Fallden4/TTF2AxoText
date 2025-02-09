@@ -1,2 +1,4 @@
 output/
 *.c
+
+src/__pycache__/
