@@ -6,27 +6,21 @@ def makeGlyphFolder(font, size, outputFolder):
     
     for ascii in range(32, 127):
         fnt = ImageFont.truetype(font, size)
-        image = Image.new("RGBA", (64, 128), (0, 0, 0, 0))  # Final image size (64x128)
+        image = Image.new("RGBA", (64, 128), (0, 0, 0, 0))
         draw = ImageDraw.Draw(image)
         
-        # Get text size
         text_width, text_height = draw.textbbox((0, 0), chr(ascii), font=fnt)[2:]
-        
-        # Create a temporary image to draw text
+
         temp_image = Image.new("RGBA", (text_width, text_height), (0, 0, 0, 0))
         temp_draw = ImageDraw.Draw(temp_image)
-        temp_draw.text((0, 0), chr(ascii), font=fnt, fill=(255, 255, 255, 255))  # White text with full opacity
-        
-        # Stretch only the text vertically (double the height)
-        stretched_image = temp_image.resize((text_width, text_height * 2), Image.Resampling.NEAREST)  # Double the height
-        
-        # Create a final image with a 64x128 canvas
-        final_image = Image.new("RGBA", (64, 128), (0, 0, 0, 0))  # Transparent background
-        
-        # Paste the stretched image starting from the top
-        final_image.paste(stretched_image, (0, 0))  # Center horizontally
+        temp_draw.text((0, 0), chr(ascii), font=fnt, fill=(255, 255, 255, 255))
 
-        # Save the final image
+        stretched_image = temp_image.resize((text_width, text_height * 2), Image.Resampling.NEAREST)
+        
+        final_image = Image.new("RGBA", (64, 128), (0, 0, 0, 0))
+        
+        final_image.paste(stretched_image, (0, 0))
+
         final_image.save(f"{outputFolder}/{ascii}.png")
 
 
