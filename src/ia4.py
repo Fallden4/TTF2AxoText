@@ -35,5 +35,21 @@ def img2ia4(image_path, var_name="image_data"):
     
     return "".join(output)
 
+def append_before_segment(file_path, content_to_append):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+
+    for i, line in enumerate(lines):
+        if '#endif // SEGMENT2_H' in line:
+            break
+    else:
+        return
+
+    lines.insert(i, content_to_append + '\n')
+
+    with open(file_path, 'w') as file:
+        file.writelines(lines)
+
 # with open(r"C:\Users\htauk\Downloads\LetterRack\test.inc.c", "w") as f:
 #     f.write(img2ia4(r"output\64.png"))
